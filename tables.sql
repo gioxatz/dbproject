@@ -7,8 +7,8 @@ GROUP BY b.ISBN;
 
 CREATE TABLE `lib1`.`schools` (
 `schoolID` INT NOT NULL AUTO_INCREMENT , 
-`name` VARCHAR(30) NOT NULL , 
-`email` VARCHAR(30) NOT NULL , 
+`name` VARCHAR(30) NOT NULL UNIQUE, 
+`email` VARCHAR(30) NOT NULL UNIQUE, 
 `phone` INT NOT NULL , 
 `str_name` VARCHAR(20) NOT NULL , 
 `str_number` INT NOT NULL , 
@@ -24,7 +24,7 @@ CREATE TABLE `lib1`.`books` (
 `num_pages` INT NOT NULL , 
 `lang` VARCHAR(18) NOT NULL , 
 `copies` INT NOT NULL , 
-`image` BLOB NOT NULL , 
+`image` VARCHAR(40) NOT NULL , 
 `summary` TEXT NOT NULL , 
 `available_copies`, INT NOT NULL,
 PRIMARY KEY (`ISBN`, `schoolID`)) ENGINE = InnoDB;
@@ -39,7 +39,7 @@ PRIMARY KEY (`authorID`)) ENGINE = InnoDB;
 CREATE TABLE `lib1`.`is_author` (
 `ISBN` BIGINT NOT NULL , 
 `authorID` INT NOT NULL , 
-PRIMARY KEY (`ISBN`)) ENGINE = InnoDB;
+PRIMARY KEY (`ISBN`, `authorID`)) ENGINE = InnoDB;
 
 ALTER TABLE `is_author` ADD FOREIGN KEY (`authorID`) REFERENCES `author`(`authorID`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
 ALTER TABLE `is_author` ADD FOREIGN KEY (`ISBN`) REFERENCES `books`(`ISBN`) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -74,7 +74,8 @@ CREATE TABLE has_keywords (
 CREATE TABLE `lib1`.`users` (
 `userID` INT NOT NULL AUTO_INCREMENT , 
 `schoolID` INT NOT NULL , 
-`name` VARCHAR(30) NOT NULL , 
+`name` VARCHAR(30) NOT NULL ,
+`surname` VARCHAR(20) NOT NULL, 
 `email` VARCHAR(30) NOT NULL , 
 `username` VARCHAR(20) NOT NULL , 
 `password` VARCHAR(30) NOT NULL , 
@@ -87,6 +88,7 @@ CREATE TABLE `lib1`.`school_director` (
 `directorID` INT NOT NULL AUTO_INCREMENT , 
 `schoolID` INT NOT NULL , 
 `name` VARCHAR(30) NOT NULL , 
+`surname` VARCHAR(20) NOT NULL,
 `userID` INT NOT NULL , 
 PRIMARY KEY (`directorID`)) ENGINE = InnoDB;
 
@@ -95,6 +97,7 @@ ALTER TABLE `school_director` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`use
 
 CREATE TABLE `lib1`.`admin` (`adminID` INT NOT NULL AUTO_INCREMENT , 
 `name` VARCHAR(30) NOT NULL , 
+`surname` VARCHAR(20) NOT NULL,
 `email` VARCHAR(30) NOT NULL , 
 `username` VARCHAR(12) NOT NULL , 
 `password` VARCHAR(20) NOT NULL , 
@@ -116,7 +119,6 @@ UNIQUE (`email`)) ENGINE
 
 CREATE TABLE `lib1`.`loans` (
 `loanID` INT NOT NULL AUTO_INCREMENT , 
-`userID` INT NOT NULL , 
 `ISBN` BIGINT NOT NULL , 
 `loan_date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 `end_date` DATE NOT NULL , 
@@ -128,13 +130,11 @@ ALTER TABLE `loans` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON D
 CREATE TABLE `lib1`.`reservations` (
 `resID` INT NOT NULL AUTO_INCREMENT , 
 `ISBN` BIGINT NOT NULL , 
-`userID` INT NOT NULL , 
 `res_date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 `end_date` DATE NOT NULL , 
 PRIMARY KEY (`resID`)) ENGINE = InnoDB;
 
 ALTER TABLE `reservations` ADD FOREIGN KEY (`ISBN`) REFERENCES `books`(`ISBN`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `reservations` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 CREATE TABLE `lib1`.`review` (
 `review_ID` INT NOT NULL AUTO_INCREMENT , 
@@ -157,6 +157,16 @@ CREATE TABLE `lib1`.`student` (
 PRIMARY KEY (`userID`)) ENGINE = InnoDB;
 
 ALTER TABLE `student` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TABLE `lib1`.`teacher` (
+`userID` INT NOT NULL , 
+`num_loans` INT NOT NULL ,
+ `num_reserv` INT NOT NULL , 
+ `can_loan` BOOLEAN NOT NULL , 
+ `can_reserve` BOOLEAN NOT NULL , 
+ PRIMARY KEY (`userID`)) ENGINE = InnoDB;
+ 
+ ALTER TABLE `teacher` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 CREATE TABLE `lib1`.`has_loan` (
 `loanID` INT NOT NULL , 

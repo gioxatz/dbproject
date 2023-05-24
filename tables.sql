@@ -1,9 +1,5 @@
-SELECT b.title, GROUP_CONCAT(a.name SEPARATOR ', ') AS author
-FROM books b
-JOIN author ba ON b.ISBN = ba.ISBN
-JOIN author a ON ba.authorid = a.authorid
-WHERE b.schoolid = 1
-GROUP BY b.ISBN;
+create database lib1;
+use lib1;
 
 CREATE TABLE `lib1`.`schools` (
 `schoolID` INT NOT NULL AUTO_INCREMENT , 
@@ -24,7 +20,7 @@ CREATE TABLE `lib1`.`books` (
 `num_pages` INT NOT NULL , 
 `lang` VARCHAR(18) NOT NULL , 
 `copies` INT NOT NULL , 
-`image` VARCHAR(40) NOT NULL , 
+`image` TEXT NOT NULL , 
 `summary` TEXT NOT NULL , 
 `available_copies`, INT NOT NULL,
 PRIMARY KEY (`ISBN`, `schoolID`)) ENGINE = InnoDB;
@@ -81,6 +77,8 @@ CREATE TABLE `lib1`.`users` (
 `password` VARCHAR(30) NOT NULL , 
 PRIMARY KEY (`userID`)) ENGINE = InnoDB;
 
+ALTER TABLE `users` ADD `birthdate` DATE NOT NULL DEFAULT '2000-01-01' AFTER `active`;
+ALTER TABLE `users` ADD `active` BOOLEAN NOT NULL DEFAULT FALSE AFTER `password`;
 ALTER TABLE `users` ADD FOREIGN KEY (`schoolID`) REFERENCES `schools`(`schoolID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 ALTER TABLE `users` ADD UNIQUE(`email`);
 
@@ -117,6 +115,9 @@ PRIMARY KEY (`handlerID`),
 UNIQUE (`username`), 
 UNIQUE (`email`)) ENGINE
 
+ALTER TABLE `handler` ADD FOREIGN KEY (`schoolID`) REFERENCES `schools`(`schoolID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
 CREATE TABLE `lib1`.`loans` (
 `loanID` INT NOT NULL AUTO_INCREMENT , 
 `ISBN` BIGINT NOT NULL , 
@@ -124,6 +125,8 @@ CREATE TABLE `lib1`.`loans` (
 `end_date` DATE NOT NULL , 
 PRIMARY KEY (`loanID`)) ENGINE = InnoDB;
 
+ALTER TABLE `loans` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE AFTER `end_date`;
+ALTER TABLE `loans` ADD `pending` BOOLEAN NOT NULL DEFAULT TRUE AFTER `active`;
 ALTER TABLE `loans` ADD FOREIGN KEY (`ISBN`) REFERENCES `books`(`ISBN`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
 ALTER TABLE `loans` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
@@ -140,7 +143,7 @@ CREATE TABLE `lib1`.`review` (
 `review_ID` INT NOT NULL AUTO_INCREMENT , 
 `ISBN` BIGINT NOT NULL , 
 `userID` INT NOT NULL , 
-`date` DATE NOT NULL , 
+`date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 `rating` INT NOT NULL , 
 `comments` TEXT NOT NULL , 
 PRIMARY KEY (`review_D`)) ENGINE = InnoDB;
@@ -150,23 +153,32 @@ ALTER TABLE `review` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON 
 
 CREATE TABLE `lib1`.`student` (
 `userID` INT NOT NULL ,
-`num_loans` INT NOT NULL , 
-`num_reserv` INT NOT NULL , 
-`can_loan` BOOLEAN NOT NULL , 
-`can_reserve` BOOLEAN NOT NULL , 
+`num_loans` INT NOT NULL DEFAULT '0', 
+`num_reserv` INT NOT NULL DEFAULT '0', 
+`can_loan` BOOLEAN NOT NULL DEFAULT '1', 
+`can_reserve` BOOLEAN NOT NULL DEFAULT '1', 
 PRIMARY KEY (`userID`)) ENGINE = InnoDB;
 
 ALTER TABLE `student` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `student`
+ADD CONSTRAINT `check_num_loans` CHECK (`num_loans` < 3);
+ALTER TABLE `student`
+ADD CONSTRAINT `chk_num_res` CHECK (`num_reserv` < 3);
+
 
 CREATE TABLE `lib1`.`teacher` (
 `userID` INT NOT NULL , 
-`num_loans` INT NOT NULL ,
- `num_reserv` INT NOT NULL , 
- `can_loan` BOOLEAN NOT NULL , 
- `can_reserve` BOOLEAN NOT NULL , 
+`num_loans` INT NOT NULL DEFAULT '0',
+ `num_reserv` INT NOT NULL DEFAULT '0' , 
+ `can_loan` BOOLEAN NOT NULL DEFAULT '1', 
+ `can_reserve` BOOLEAN NOT NULL DEFAULT '1', 
  PRIMARY KEY (`userID`)) ENGINE = InnoDB;
  
  ALTER TABLE `teacher` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ ALTER TABLE `teacher`
+ADD CONSTRAINT `check_num_loans` CHECK (`num_loans` < 3);
+ALTER TABLE `teacher`
+ADD CONSTRAINT `chk_num_res` CHECK (`num_reserv` < 3);
 
 CREATE TABLE `lib1`.`has_loan` (
 `loanID` INT NOT NULL , 
@@ -183,3 +195,29 @@ PRIMARY KEY (`resID`, `userID`)) ENGINE = InnoDB;
 
 ALTER TABLE `has_reserv` ADD FOREIGN KEY (`resID`) REFERENCES `reservations`(`resID`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
 ALTER TABLE `has_reserv` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+CREATE INDEX subs ON subjects (subject);
+CREATE INDEX keyws ON keywords (keyword);
+
+
+
+CREATE TRIGGER increment_num_reserv_trigger AFTER INSERT ON reservations
+FOR EACH ROW
+BEGIN
+    DECLARE user_type VARCHAR(10);
+    
+    SET user_type = (
+        SELECT CASE
+            WHEN EXISTS(SELECT * FROM student WHERE userID = NEW.userID) THEN 'student'
+            WHEN EXISTS(SELECT * FROM teacher WHERE userID = NEW.userID) THEN 'teacher'
+        END
+    );
+    
+    IF user_type = 'student' THEN
+        UPDATE student SET num_reserv = num_reserv + 1 WHERE userID = NEW.userID;
+    ELSEIF user_type = 'teacher' THEN
+        UPDATE teacher SET num_reserv = num_reserv + 1 WHERE userID = NEW.userID;
+    END IF;
+END;

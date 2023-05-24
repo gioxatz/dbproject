@@ -77,8 +77,8 @@ CREATE TABLE `lib1`.`users` (
 `password` VARCHAR(30) NOT NULL , 
 PRIMARY KEY (`userID`)) ENGINE = InnoDB;
 
-ALTER TABLE `users` ADD `birthdate` DATE NOT NULL DEFAULT '2000-01-01' AFTER `active`;
 ALTER TABLE `users` ADD `active` BOOLEAN NOT NULL DEFAULT FALSE AFTER `password`;
+ALTER TABLE `users` ADD `birthdate` DATE NOT NULL DEFAULT '2000-01-01' AFTER `active`;
 ALTER TABLE `users` ADD FOREIGN KEY (`schoolID`) REFERENCES `schools`(`schoolID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 ALTER TABLE `users` ADD UNIQUE(`email`);
 
@@ -113,7 +113,7 @@ CREATE TABLE `lib1`.`handler` (
 `email` VARCHAR(30) NOT NULL , 
 PRIMARY KEY (`handlerID`), 
 UNIQUE (`username`), 
-UNIQUE (`email`)) ENGINE
+UNIQUE (`email`)) ENGINE = InnoDB;
 
 ALTER TABLE `handler` ADD FOREIGN KEY (`schoolID`) REFERENCES `schools`(`schoolID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
@@ -128,7 +128,6 @@ PRIMARY KEY (`loanID`)) ENGINE = InnoDB;
 ALTER TABLE `loans` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE AFTER `end_date`;
 ALTER TABLE `loans` ADD `pending` BOOLEAN NOT NULL DEFAULT TRUE AFTER `active`;
 ALTER TABLE `loans` ADD FOREIGN KEY (`ISBN`) REFERENCES `books`(`ISBN`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
-ALTER TABLE `loans` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 CREATE TABLE `lib1`.`reservations` (
 `resID` INT NOT NULL AUTO_INCREMENT , 
@@ -208,6 +207,7 @@ FOR EACH ROW
 BEGIN
     DECLARE user_type VARCHAR(10);
     
+    -- Check if the user is a student or a teacher
     SET user_type = (
         SELECT CASE
             WHEN EXISTS(SELECT * FROM student WHERE userID = NEW.userID) THEN 'student'
@@ -215,6 +215,7 @@ BEGIN
         END
     );
     
+    -- Increment num_reserv by 1 in the respective table
     IF user_type = 'student' THEN
         UPDATE student SET num_reserv = num_reserv + 1 WHERE userID = NEW.userID;
     ELSEIF user_type = 'teacher' THEN

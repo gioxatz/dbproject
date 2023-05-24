@@ -234,10 +234,10 @@ INSERT INTO is_author  VALUES ( 9782081011296 ,  48 );
 INSERT INTO is_author  VALUES ( 9782081011297 ,  49 );
 INSERT INTO is_author  VALUES ( 9782081011298 ,  50 );
 INSERT INTO is_author  VALUES ( 9782081011299 ,  51 );
-INSERT INTO is_author  VALUES ( 9782081011300 ,  52 );
-INSERT INTO is_author  VALUES ( 9782081011301 ,  53 );
-INSERT INTO is_author  VALUES ( 9782081011302 ,  54 );
-INSERT INTO is_author  VALUES ( 9782081011303 ,  55 );
+INSERT INTO is_author  VALUES ( 9782081011300 ,  8 );
+INSERT INTO is_author  VALUES ( 9782081011301 ,  9 );
+INSERT INTO is_author  VALUES ( 9782081011302 ,  8 );
+INSERT INTO is_author  VALUES ( 9782081011303 ,  5 );
 INSERT INTO is_author  VALUES ( 9782081011304 ,  1 );
 INSERT INTO is_author  VALUES ( 9782081011305 ,  2 );
 INSERT INTO is_author  VALUES ( 9782081011306 ,  3 );
@@ -290,9 +290,9 @@ INSERT INTO is_author  VALUES ( 9782081011340 ,  48 );
 INSERT INTO is_author  VALUES ( 9782081011341 ,  49 );
 INSERT INTO is_author  VALUES ( 9782081011342 ,  50 );
 INSERT INTO is_author  VALUES ( 9782081011343 ,  51 );
-INSERT INTO is_author  VALUES ( 9782081011344 ,  52 );
-INSERT INTO is_author  VALUES ( 9782081011345 ,  53 );
-INSERT INTO is_author  VALUES ( 9782081011346 ,  54 );
+INSERT INTO is_author  VALUES ( 9782081011344 ,  8 );
+INSERT INTO is_author  VALUES ( 9782081011345 ,  9 );
+INSERT INTO is_author  VALUES ( 9782081011346 ,  8 );
 INSERT INTO is_author  VALUES ( 9782081011347 ,  12 );
 INSERT INTO is_author  VALUES ( 9782081011348 ,  13 );
 INSERT INTO is_author  VALUES ( 9782081011320 ,  22 );
@@ -357,7 +357,7 @@ INSERT INTO is_author  VALUES ( 9782081011335 ,  40 );
   
   INSERT INTO has_subject values(9780809501632,  1);
   INSERT INTO has_keywords values( 9780809501632, 1);
-  INSERT INTO has_subject values( 9780809501632,  ,3);
+  INSERT INTO has_subject values( 9780809501632 ,3);
   INSERT INTO has_keywords values( 9780809501632,  2);
   INSERT INTO has_subject VALUES( 9780081011249, 1);
   INSERT INTO has_keywords VALUES( 9780081011249, 3);
@@ -385,9 +385,9 @@ INSERT INTO has_subject  VALUES ( 9782081011257 ,  11 );
 INSERT INTO has_subject  VALUES ( 9782081011258 ,  12 );
 INSERT INTO has_subject  VALUES ( 9782081011259 ,  13 );
 INSERT INTO has_subject  VALUES ( 9782081011260 ,  14 );
-INSERT INTO has_subject  VALUES ( 9782081011261 ,  15 );
-INSERT INTO has_subject  VALUES ( 9782081011262 ,  16 );
-INSERT INTO has_subject  VALUES ( 9782081011263 ,  17 );
+INSERT INTO has_subject  VALUES ( 9782081011261 ,  8 );
+INSERT INTO has_subject  VALUES ( 9782081011262 ,  9 );
+INSERT INTO has_subject  VALUES ( 9782081011263 ,  8 );
 INSERT INTO has_subject  VALUES ( 9782081011264 ,  1 );
 INSERT INTO has_subject  VALUES ( 9782081011265 ,  2 );
 INSERT INTO has_subject  VALUES ( 9782081011266 ,  3 );
@@ -400,9 +400,9 @@ INSERT INTO has_subject  VALUES ( 9782081011272 ,  11 );
 INSERT INTO has_subject  VALUES ( 9782081011273 ,  12 );
 INSERT INTO has_subject  VALUES ( 9782081011274 ,  13 );
 INSERT INTO has_subject  VALUES ( 9782081011275 ,  14 );
-INSERT INTO has_subject  VALUES ( 9782081011276 ,  15 );
-INSERT INTO has_subject  VALUES ( 9782081011277 ,  16 );
-INSERT INTO has_subject  VALUES ( 9782081011278 ,  17 );
+INSERT INTO has_subject  VALUES ( 9782081011276 ,  8 );
+INSERT INTO has_subject  VALUES ( 9782081011277 ,  9 );
+INSERT INTO has_subject  VALUES ( 9782081011278 ,  8 );
 INSERT INTO has_subject  VALUES ( 9782081011279 ,  1 );
 INSERT INTO has_subject  VALUES ( 9782081011280 ,  2 );
 INSERT INTO has_subject  VALUES ( 9782081011281 ,  3 );
@@ -415,9 +415,9 @@ INSERT INTO has_subject  VALUES ( 9782081011287 ,  11 );
 INSERT INTO has_subject  VALUES ( 9782081011288 ,  12 );
 INSERT INTO has_subject  VALUES ( 9782081011289 ,  13 );
 INSERT INTO has_subject  VALUES ( 9782081011290 ,  14 );
-INSERT INTO has_subject  VALUES ( 9782081011291 ,  15 );
-INSERT INTO has_subject  VALUES ( 9782081011292 ,  16 );
-INSERT INTO has_subject  VALUES ( 9782081011293 ,  17 );
+INSERT INTO has_subject  VALUES ( 9782081011291 ,  8 );
+INSERT INTO has_subject  VALUES ( 9782081011292 ,  9 );
+INSERT INTO has_subject  VALUES ( 9782081011293 ,  8 );
 INSERT INTO has_subject  VALUES ( 9782081011294 ,  1 );
 INSERT INTO has_subject  VALUES ( 9782081011295 ,  2 );
 INSERT INTO has_subject  VALUES ( 9782081011296 ,  3 );
@@ -430,15 +430,15 @@ INSERT INTO has_subject  VALUES ( 9782081011302 ,  11 );
 INSERT INTO has_subject  VALUES ( 9782081011303 ,  12 );
 INSERT INTO has_subject  VALUES ( 9782081011304 ,  13 );
 INSERT INTO has_subject  VALUES ( 9782081011305 ,  14 );
-INSERT INTO has_subject  VALUES ( 9782081011306 ,  15 );
-INSERT INTO has_subject  VALUES ( 9782081011307 ,  16 );
-INSERT INTO has_subject  VALUES ( 9782081011308 ,  17 );
+INSERT INTO has_subject  VALUES ( 9782081011306 ,  9 );
+INSERT INTO has_subject  VALUES ( 9782081011307 ,  8 );
+INSERT INTO has_subject  VALUES ( 9782081011308 ,  2 );
 INSERT INTO has_subject  VALUES ( 9782081011309 ,  1 );
 INSERT INTO has_subject  VALUES ( 9782081011310 ,  2 );
 INSERT INTO has_subject  VALUES ( 9782081011311 ,  3 );
-INSERT INTO has_subject  VALUES ( 9782081011301 ,  17 );
-INSERT INTO has_subject  VALUES ( 9782081011302 ,  16 );
-INSERT INTO has_subject  VALUES ( 9782081011303 ,  15 );
+INSERT INTO has_subject  VALUES ( 9782081011301 ,  8 );
+INSERT INTO has_subject  VALUES ( 9782081011302 ,  9 );
+INSERT INTO has_subject  VALUES ( 9782081011303 ,  4 );
 INSERT INTO has_subject  VALUES ( 9782081011304 ,  14 );
 INSERT INTO has_subject  VALUES ( 9782081011305 ,  13 );
 INSERT INTO has_subject  VALUES ( 9782081011306 ,  12 );
@@ -456,9 +456,9 @@ INSERT INTO has_subject  VALUES ( 9782081011320 ,  11 );
 INSERT INTO has_subject  VALUES ( 9782081011321 ,  12 );
 INSERT INTO has_subject  VALUES ( 9782081011322 ,  13 );
 INSERT INTO has_subject  VALUES ( 9782081011323 ,  14 );
-INSERT INTO has_subject  VALUES ( 9782081011324 ,  15 );
-INSERT INTO has_subject  VALUES ( 9782081011325 ,  16 );
-INSERT INTO has_subject  VALUES ( 9782081011326 ,  17 );
+INSERT INTO has_subject  VALUES ( 9782081011324 ,  7 );
+INSERT INTO has_subject  VALUES ( 9782081011325 ,  8 );
+INSERT INTO has_subject  VALUES ( 9782081011326 ,  9 );
 INSERT INTO has_subject  VALUES ( 9782081011327 ,  1 );
 INSERT INTO has_subject  VALUES ( 9782081011328 ,  2 );
 INSERT INTO has_subject  VALUES ( 9782081011329 ,  3 );
@@ -471,9 +471,9 @@ INSERT INTO has_subject  VALUES ( 9782081011335 ,  11 );
 INSERT INTO has_subject  VALUES ( 9782081011336 ,  12 );
 INSERT INTO has_subject  VALUES ( 9782081011337 ,  13 );
 INSERT INTO has_subject  VALUES ( 9782081011338 ,  14 );
-INSERT INTO has_subject  VALUES ( 9782081011339 ,  15 );
-INSERT INTO has_subject  VALUES ( 9782081011340 ,  16 );
-INSERT INTO has_subject  VALUES ( 9782081011341 ,  17 );
+INSERT INTO has_subject  VALUES ( 9782081011339 ,  9 );
+INSERT INTO has_subject  VALUES ( 9782081011340 ,  4 );
+INSERT INTO has_subject  VALUES ( 9782081011341 ,  8 );
 INSERT INTO has_subject  VALUES ( 9782081011342 ,  1 );
 INSERT INTO has_subject  VALUES ( 9782081011343 ,  2 );
 INSERT INTO has_subject  VALUES ( 9782081011344 ,  3 );
@@ -595,13 +595,7 @@ INSERT INTO has_keywords  VALUES ( 9782081011346 ,  9 );
 INSERT INTO has_keywords  VALUES ( 9782081011347 ,  10 );
 INSERT INTO has_keywords  VALUES ( 9782081011348 ,  17 );
   
-  INSERT INTO users VALUES(default, 1, "gioxatz", "Password1", "Giorgos", "Chatzichristodoulou");
-  INSERT INTO users VALUES(default, 1, "helenchatz", "Password2", "Eleni", "Chatzichristodoulou");  
-  INSERT INTO users VALUES(default, 2, "nick123", "nick123", "Nikolaos", "Albert");
-  INSERT INTO users VALUES(default, 2, "chopin", "Password3", "Frederic", "Chopin");
-  INSERT INTO users VALUES(default, 3, "ravel", "Password4", "Maurice", "Ravel");
-  INSERT INTO users VALUES(default, 1, "gershwin", "Password5", "George", "Gershwin");
-  INSERT INTO users VALUES(default, 4, "jsbach", "Password6", "Johahn Sebastian", "Bach");
+
   
   
   INSERT INTO `users` (`schoolID`, `name`, `surname`, `email`, `username`, `password`)
@@ -876,21 +870,37 @@ VALUES
 VALUES
 (default, 'Αριστοτέλης', 'Γεωργίου', 'admin1@example.com', 'admin1', 'adpassword1'),
 (2, 'Ιπποκρατης', 'Πετροπούλου', 'admin2@example.com', 'admin2', 'adpassword2'),
-  
+
+
+INSERT INTO loans values(default, 9782081011265, default, default, default, default);
+UPDATE books SET available_copies = available_copies - 1 where ISBN = 9782081011265 and schoolID = 1;
+UPDATE student SET num_loans = num_loans + 1 where userID = 16;
+INSERT INTO has_loan values(1, 16);
+
+INSERT INTO loans values(default, 9782081011263, default, default, default, default);
+UPDATE books SET available_copies = available_copies - 1 where ISBN = 9782081011263 and schoolID = 1;
+UPDATE student SET num_loans = num_loans + 1 where userID = 13;
+INSERT INTO has_loan values(2, 16);
 
 INSERT INTO loans values(default, 9782081011253, default, default, default, default);
 UPDATE books SET available_copies = available_copies - 1 where ISBN = 9782081011253 and schoolID = 1;
 UPDATE student SET num_loans = num_loans + 1 where userID = 13;
-INSERT INTO has_loan values(3, 13)
+INSERT INTO has_loan values(3, 13);
 
 INSERT INTO loans values(default, 9782081011253, default, default, default, 0);
 UPDATE books SET available_copies = available_copies - 1 where ISBN = 9782081011253 and schoolID = 1;
+UPDATE student SET num_loans = num_loans + 1 where userID = 51;
 INSERT INTO has_loan values(4, 51);
 
 INSERT INTO loans values(default, 9782081011275, default, default, default, 0);
 UPDATE books SET available_copies = available_copies - 1 where ISBN = 9782081011275 and schoolID = 1;
-UPDATE student SET num_loans = 2 where userID = 51;
+UPDATE student SET num_loans  = num_loans + 1 where userID = 51;
 INSERT INTO has_loan values(5, 51);
+
+INSERT INTO loans values(default, 9782081011268, default, default, default, 0);
+UPDATE books SET available_copies = available_copies - 1 where ISBN = 9782081011268 and schoolID = 2;
+UPDATE student SET num_loans = 2 where userID = 61;
+INSERT INTO has_loan values(6, 61);
 
 
 INSERT INTO loans values(default, 9782081011303, default, default, default, default);
@@ -946,4 +956,4 @@ INSERT INTO has_loan values(16, 58);
 INSERT INTO loans values(default, 9782081011322, 2023-04-01, default, default, default);
 UPDATE books SET available_copies = available_copies - 1 where ISBN = 9782081011322 and schoolID = 3;
 UPDATE student SET num_loans = num_loans + 1 where userID = 72;
-INSERT INTO has_loan values(18, 72);
+INSERT INTO has_loan values(17, 72);

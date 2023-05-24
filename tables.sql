@@ -22,7 +22,7 @@ CREATE TABLE `lib1`.`books` (
 `copies` INT NOT NULL , 
 `image` TEXT NOT NULL , 
 `summary` TEXT NOT NULL , 
-`available_copies`, INT NOT NULL,
+`available_copies` INT NOT NULL,
 PRIMARY KEY (`ISBN`, `schoolID`)) ENGINE = InnoDB;
 
 ALTER TABLE `books` ADD FOREIGN KEY (`schoolID`) REFERENCES `schools`(`schoolID`) ON DELETE RESTRICT ON UPDATE RESTRICT;

@@ -115,6 +115,7 @@ PRIMARY KEY (`handlerID`),
 UNIQUE (`username`), 
 UNIQUE (`email`)) ENGINE = InnoDB;
 
+ALTER TABLE `handler` ADD `active` BOOLEAN NOT NULL DEFAULT FALSE AFTER `email`;
 ALTER TABLE `handler` ADD FOREIGN KEY (`schoolID`) REFERENCES `schools`(`schoolID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
@@ -199,26 +200,27 @@ ALTER TABLE `has_reserv` ADD FOREIGN KEY (`userID`) REFERENCES `users`(`userID`)
 
 CREATE INDEX subs ON subjects (subject);
 CREATE INDEX keyws ON keywords (keyword);
+CREATE INDEX unames ON users (username);
+CREATE INDEX pasrs ON users (password);
 
 
 
-CREATE TRIGGER increment_num_reserv_trigger AFTER INSERT ON reservations
-FOR EACH ROW
-BEGIN
+
+
+CREATE TRIGGER `increase_num_reserv_trigger` AFTER INSERT ON `has_reserv`
+ FOR EACH ROW BEGIN
     DECLARE user_type VARCHAR(10);
-    
-    -- Check if the user is a student or a teacher
     SET user_type = (
         SELECT CASE
             WHEN EXISTS(SELECT * FROM student WHERE userID = NEW.userID) THEN 'student'
             WHEN EXISTS(SELECT * FROM teacher WHERE userID = NEW.userID) THEN 'teacher'
         END
     );
-    
-    -- Increment num_reserv by 1 in the respective table
+
     IF user_type = 'student' THEN
         UPDATE student SET num_reserv = num_reserv + 1 WHERE userID = NEW.userID;
     ELSEIF user_type = 'teacher' THEN
         UPDATE teacher SET num_reserv = num_reserv + 1 WHERE userID = NEW.userID;
     END IF;
-END;
+END
+
